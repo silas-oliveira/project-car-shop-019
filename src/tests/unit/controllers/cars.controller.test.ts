@@ -1,25 +1,29 @@
 import * as chai from 'chai';
 import chaiHttp from 'chai-http';
-import { isValidObjectId } from 'mongoose';
 import Sinon from 'sinon';
+import CarsController from '../../../controllers/cars.controller';
+import CarsModel from '../../../models/cars.model';
+import CarsService from '../../../services/cars.service';
+import { bodyCarMock, bodyRequestCarMock } from '../mocks/carsMock';
+const { expect } = chai;
 
 chai.use(chaiHttp)
 
 describe('Testa a camada de Controller', () => {
-  describe('Teste o método addCar "cars.controller.ts', () => {
-    it('Deve retornar status 201', () => {
-      const request = chai.request('app')
-        .post('/cars')
-        .send({
-          model: "Tesla", 
-          year: 2021, 
-          color: 'gray', 
-          buyValue: 380000, 
-          doorsQty: 4, 
-          seatsQty: 4
-        })
+  const carsModel = new CarsModel();
+  const carsService = new CarsService(carsModel);
+  const carsController = new CarsController(carsService);
 
-        expect(request).toHaveProperty('status');
+  describe('Teste o método addCar "cars.controller.ts', () => {
+    before(() => {
+      Sinon.stub(carsController, 'addCar').resolves(bodyRequestCarMock);
+    })
+    after(() => {
+      Sinon.restore();
+    })
+    it('Deve retornar o body', async () => {
+      const addCar = await carsController.addCar(bodyCarMock);
+      expect(addCar).to.be.deep.equal(bodyRequestCarMock)
     })
   });
 });
