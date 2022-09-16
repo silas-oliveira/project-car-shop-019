@@ -6,7 +6,9 @@ import carsRouter from './api/routes/cars.router';
 const app = express();
 
 app.use(express.json());
+
 app.use('/cars', carsRouter);
+
 app.use(errorHandler);
 
 export default app;
