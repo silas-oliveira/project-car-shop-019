@@ -16,7 +16,7 @@ describe('Testa a camada de Controller', () => {
 
   describe('Teste o método addCar "cars.controller.ts', () => {
     before(() => {
-      Sinon.stub(carsController, 'addCar').resolves(bodyRequestCarMock);
+      Sinon.stub(carsService, 'addCar').resolves(bodyRequestCarMock);
     })
     after(() => {
       Sinon.restore();
@@ -29,7 +29,7 @@ describe('Testa a camada de Controller', () => {
 
   describe('Teste o método getAll "cars.controller.ts', () => {
     it('Deve retornar o body', async () => {
-      Sinon.stub(carsController, 'getAll').resolves(getAllMock);
+      Sinon.stub(carsService, 'getAll').resolves(getAllMock);
       const getAll = await carsController.getAll();
       expect(getAll).to.be.deep.equal(getAllMock)
       Sinon.restore();
