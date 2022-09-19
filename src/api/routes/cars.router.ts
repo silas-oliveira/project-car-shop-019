@@ -14,4 +14,9 @@ carsRouter.post('/', async (req, res) => {
   return res.status(201).json(result);
 });
 
+carsRouter.get('/', async (req, res) => {
+  const result = await carsController.getAll();
+  return res.status(200).json(result);
+});
+
 export default carsRouter;

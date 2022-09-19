@@ -8,6 +8,11 @@ class CarsController {
     const result = this.carsService.addCar(body);
     return result;
   }
+
+  getAll() {
+    const result = this.carsService.getAll();
+    return result;
+  }
 }
 
 export default CarsController;

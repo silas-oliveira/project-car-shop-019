@@ -11,6 +11,11 @@ class CarsService implements IService<ICar> {
     const result = this.carsModel.create(body);
     return result;
   }
+
+  getAll() {
+    const result = this.carsModel.read();
+    return result;
+  }
 }
 
 export default CarsService;
