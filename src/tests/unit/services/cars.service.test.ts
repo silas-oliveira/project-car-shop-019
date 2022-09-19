@@ -10,19 +10,21 @@ describe('Testa a camada de Service', () => {
   const carsService = new CarsService(carsModel);
 
   describe('Teste o método addCar "cars.service.ts', () => {
-    before(async () => {
-      sinon
-        .stub(carsService, 'addCar')
-        .resolves(bodyRequestCarMock);
-    });
-  
-    after(()=>{
-      sinon.restore();
-    })
-  
+    // it('Deve retornar o body', async () => {
+    //   sinon
+    //   .stub(carsService, 'addCar')
+    //   .resolves(bodyRequestCarMock);
+    //   const addCar = await carsService.addCar(bodyRequestCarMock); 
+    //   expect(addCar).to.be.deep.equal(bodyRequestCarMock)
+    //   sinon.restore();
+    // });
     it('Deve retornar o body', async () => {
+      sinon
+      .stub(carsModel, 'create')
+      .resolves(bodyRequestCarMock);
       const addCar = await carsService.addCar(bodyRequestCarMock); 
       expect(addCar).to.be.deep.equal(bodyRequestCarMock)
+      sinon.restore();
     });
   });
 });
